@@ -6,19 +6,19 @@ Add it in your root build.gradle at the end of repositories:
 
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+    repositories {
+        ...
+	    maven { url 'https://jitpack.io' }
     }
+}
 ```
 	
 ### Step 2. Add the dependency
 
 ```
 dependencies {
-	        compile 'com.github.therightwaystudio:QtumSDK:v1.0.1'
-    }
+    compile 'com.github.therightwaystudio:QtumSDK:v1.0.1'
+}
 ```
 	
 ## Maven:
@@ -27,10 +27,10 @@ dependencies {
 
 ```
 <repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
+	<repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+	</repository>
 </repositories>
 ```
 	
@@ -38,9 +38,9 @@ dependencies {
 
 ```
 <dependency>
-	    <groupId>com.github.therightwaystudio</groupId>
-	    <artifactId>QtumSDK</artifactId>
-	    <version>v1.0.1</version>
+    <groupId>com.github.therightwaystudio</groupId>
+    <artifactId>QtumSDK</artifactId>
+    <version>v1.0.1</version>
 </dependency>
 ```
 
@@ -51,9 +51,9 @@ In the button event handler, add a method call to open the QtumPaymentActivity. 
 
 ```
 mButtonQtumPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                QtumPaymentActivity.openQtumPaymentActivity(MainActivity.this,mEditTextAmount.getText().toString());
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        QtumPaymentActivity.openQtumPaymentActivity(MainActivity.this,mEditTextAmount.getText().toString());
+    }
+});
 ```
