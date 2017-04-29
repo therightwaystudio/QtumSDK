@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">QtumSDK</string>
+    <string name="order_details">Order details:</string>
+    <string name="open_in_wallet">Open in Wallet</string>
+    <string name="or_copy_wallet_address">Or Copy wallet address</string>
+    <string name="cancel">Cancel</string>
+    <string name="total">Total =</string>
 </resources>

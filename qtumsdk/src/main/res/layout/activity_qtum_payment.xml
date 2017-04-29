@@ -13,7 +13,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order details:"
+        android:text="@string/order_details"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
@@ -23,25 +23,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"/>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total = "
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
-
     <Button
-        android:id="@+id/bt_open_in_wallet"
+        android:id="@+id/qtum_sdk_bt_open_in_wallet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Open in Wallet"
+        android:text="@string/open_in_wallet"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
@@ -56,8 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Or Copy wallet address"
-        app:layout_constraintTop_toBottomOf="@+id/bt_open_in_wallet"
+        android:text="@string/or_copy_wallet_address"
+        app:layout_constraintTop_toBottomOf="@+id/qtum_sdk_bt_open_in_wallet"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
@@ -65,39 +51,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"/>
 
-    <ImageView
-        android:id="@+id/iv_qr_code_qtum"
-        android:layout_width="145dp"
-        android:layout_height="0dp"
-
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/bt_cancel"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address_qtum"/>
-
     <Button
-        android:id="@+id/bt_cancel"
+        android:id="@+id/qtum_sdk_bt_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Cancel"
+        android:layout_marginBottom="16dp"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.501"/>
 
     <TextView
-        android:id="@+id/tv_address_qtum"
+        android:id="@+id/qtum_sdk_tv_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -112,16 +82,18 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/textView5"
@@ -129,13 +101,95 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="73dp"
             android:layout_marginStart="8dp"
-            android:text="Total = "
+            android:text="@string/total"
             app:layout_constraintLeft_toLeftOf="parent"
             tools:layout_editor_absoluteY="64dp"/>
         <TextView
-            android:id="@+id/tv_amount_qtum"
+            android:id="@+id/qtum_sdk_tv_amount_qtum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout3"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/total"
+            tools:layout_editor_absoluteX="265dp"
+            tools:layout_editor_absoluteY="25dp"/>
+
+        <TextView
+            android:id="@+id/qtum_sdk_tv_amount_dollar_currency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-98dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/qtum_sdk_bt_cancel"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/qtum_sdk_tv_address"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <ImageView
+            android:id="@+id/qtum_sdk_iv_qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="250dp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1 QTUM = "/>
+
+            <TextView
+                android:id="@+id/qtum_sdk_tv_exchange_rates_TO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
     </LinearLayout>
 

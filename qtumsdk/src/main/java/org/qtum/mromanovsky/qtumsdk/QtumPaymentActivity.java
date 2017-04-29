@@ -1,5 +1,6 @@
 package org.qtum.mromanovsky.qtumsdk;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
@@ -24,51 +25,70 @@ import com.google.zxing.common.BitMatrix;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 
 public class QtumPaymentActivity extends AppCompatActivity {
     Button mButtonOpenInWallet;
     Button mButtonCancel;
     TextView mTextViewAddress;
     TextView mTextViewAmountQtum;
+    TextView mTextViewAmountCurrency;
     ImageView mImageViewQrCode;
+    TextView mTextViewExchangeRatesTo;
     private final String PKG = "org.qtum.mromanovsky.qtum";
     private final String CLS = "org.qtum.mromanovsky.qtum.ui.activity.MainActivity.MainActivity";
     private final String SEND_FROM_SDK = "qtum.intent.action.SEND_FROM_SDK";
     private final String SEND_ADDRESS = "qtum.intent.extra.SEND_ADDRESS";
     private final String SEND_AMOUNT = "qtum.intent.extra.SEND_AMOUNT";
+    private static final String SEND_AMOUNT_DOLLAR = "qtum.intent.extra.SEND_AMOUNT_DOLLAR";
 
-    String address = "testaddress";
-    String amount = "15";
+    private final BigDecimal EXCHANGE_RATES_DOLLAR_TO_QTUM = new BigDecimal("0.078");
+
+    String addressString = "test_address";
+    String amountQtumString;
+    String amountDollarString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qtum_payment);
 
-        mButtonCancel = (Button) findViewById(R.id.bt_cancel);
-        mButtonOpenInWallet = (Button) findViewById(R.id.bt_open_in_wallet);
-        mTextViewAddress = (TextView) findViewById(R.id.tv_address_qtum);
-        mTextViewAmountQtum = (TextView) findViewById(R.id.tv_amount_qtum);
-        mImageViewQrCode = (ImageView) findViewById(R.id.iv_qr_code_qtum);
+        mButtonCancel = (Button) findViewById(R.id.qtum_sdk_bt_cancel);
+        mButtonOpenInWallet = (Button) findViewById(R.id.qtum_sdk_bt_open_in_wallet);
+        mTextViewAddress = (TextView) findViewById(R.id.qtum_sdk_tv_address);
+        mTextViewAmountQtum = (TextView) findViewById(R.id.qtum_sdk_tv_amount_qtum);
+        mTextViewAmountCurrency = (TextView) findViewById(R.id.qtum_sdk_tv_amount_dollar_currency);
+        mImageViewQrCode = (ImageView) findViewById(R.id.qtum_sdk_iv_qr_code);
+        mTextViewExchangeRatesTo = (TextView) findViewById(R.id.qtum_sdk_tv_exchange_rates_TO);
 
-        mTextViewAmountQtum.setText(amount);
-        mTextViewAddress.setText(address);
+        mTextViewExchangeRatesTo.setText(EXCHANGE_RATES_DOLLAR_TO_QTUM.toString()+" USD");
+
+        amountDollarString = getIntent().getStringExtra(SEND_AMOUNT_DOLLAR);
+
+        BigDecimal amountDollar = new BigDecimal(amountDollarString);
+
+        amountQtumString = amountDollar.multiply(EXCHANGE_RATES_DOLLAR_TO_QTUM).toString();
+
+        mTextViewAmountCurrency.setText(amountDollarString + " USD");
+        mTextViewAmountQtum.setText(amountQtumString + " QTUM");
+        mTextViewAddress.setText(addressString);
 
         mTextViewAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClipboardManager clipboard = (ClipboardManager) QtumPaymentActivity.this.getSystemService(CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("label", address);
+                ClipData clip = ClipData.newPlainText("label", addressString);
                 clipboard.setPrimaryClip(clip);
-                //TODO: change toast
+                //TODO: maybe change toast
                 Toast.makeText(QtumPaymentActivity.this, "Coped", Toast.LENGTH_SHORT).show();
             }
         });
 
         JSONObject json = new JSONObject();
         try {
-            json.put("amount", amount);
-            json.put("publicAddress", address);
+            json.put("amount", amountQtumString);
+            json.put("publicAddress", addressString);
             mImageViewQrCode.setImageBitmap(TextToImageEncode(json.toString()));
         } catch (JSONException | WriterException e) {
             e.printStackTrace();
@@ -81,8 +101,8 @@ public class QtumPaymentActivity extends AppCompatActivity {
                 intent.setComponent(new ComponentName(PKG, CLS));
                 if(getPackageManager().resolveActivity(intent, 0) != null) {
                     intent.setAction(SEND_FROM_SDK);
-                    intent.putExtra(SEND_ADDRESS,address);
-                    intent.putExtra(SEND_AMOUNT,amount);
+                    intent.putExtra(SEND_ADDRESS, addressString);
+                    intent.putExtra(SEND_AMOUNT, amountQtumString);
 
                     startActivity(intent);
                 } else {
@@ -97,6 +117,12 @@ public class QtumPaymentActivity extends AppCompatActivity {
                 finishActivity();
             }
         });
+    }
+
+    public static void openQtumPaymentActivity(Activity activity,String amount){
+        Intent intent = new Intent(activity, QtumPaymentActivity.class);
+        intent.putExtra(SEND_AMOUNT_DOLLAR, amount);
+        activity.startActivity(intent);
     }
 
     private Bitmap TextToImageEncode(String Value) throws WriterException {
