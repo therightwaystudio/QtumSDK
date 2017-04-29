@@ -11,7 +11,7 @@ import org.qtum.mromanovsky.qtumsdk.QtumPaymentActivity;
 public class MainActivity extends AppCompatActivity {
 
     EditText mEditTextAmount;
-    Button mButtonQtumSdk;
+    Button mButtonQtumPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         mEditTextAmount = (EditText) findViewById(R.id.et_amount);
 
-        mButtonQtumSdk = (Button) findViewById(R.id.button);
+        mButtonQtumPayment = (Button) findViewById(R.id.button);
 
-        mButtonQtumSdk.setOnClickListener(new View.OnClickListener() {
+        mButtonQtumPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 QtumPaymentActivity.openQtumPaymentActivity(MainActivity.this,mEditTextAmount.getText().toString());
